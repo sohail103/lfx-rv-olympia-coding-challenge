@@ -10,7 +10,7 @@ void ObjectRegistry::registerObject(const std::string &name,
                                     CreatorFunc creator) {
   instance().registry[name] = creator; // to register a new object
 }
-std::unique_ptr<GeometricObject>
+std::unique_ptr<Object>
 ObjectRegistry::create(const std::string &name) {
   auto &reg = instance().registry;
   auto it = reg.find(name);

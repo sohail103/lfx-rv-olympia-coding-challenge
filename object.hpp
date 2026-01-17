@@ -8,13 +8,12 @@
 
 // abstract class that other objects derive from
 // objects that inherit from this have to define the overridden functions
-class GeometricObject {
+class Object {
 public:
-  virtual ~GeometricObject() = default;
+  virtual ~Object() = default;
 
   // pure virtual functions that derived objects must implement
   virtual std::string getDescription() const = 0;
-  virtual std::string getUsage() const = 0;
   virtual bool parseAndCalculate(const std::vector<std::string> &args) = 0;
   virtual std::string getName() const = 0;
 };
@@ -23,14 +22,14 @@ public:
 // object
 class ObjectRegistry {
 private:
-  using CreatorFunc = std::unique_ptr<GeometricObject> (*)();
+  using CreatorFunc = std::unique_ptr<Object> (*)();
   std::map<std::string, CreatorFunc> registry;
 
   static ObjectRegistry &instance();
 
 public:
   static void registerObject(const std::string &name, CreatorFunc creator);
-  static std::unique_ptr<GeometricObject> create(const std::string &name);
+  static std::unique_ptr<Object> create(const std::string &name);
   static std::vector<std::string> getRegisteredObjects();
 };
 
@@ -39,7 +38,7 @@ template <typename T> class ObjectRegistrar {
 public:
   ObjectRegistrar(const std::string &name) {
     ObjectRegistry::registerObject(
-        name, []() -> std::unique_ptr<GeometricObject> {
+        name, []() -> std::unique_ptr<Object> {
           return std::make_unique<T>(); // lambda returns unique_ptr to newly
                                         // created object
         });

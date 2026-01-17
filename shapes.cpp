@@ -7,19 +7,17 @@
 // circle implementation
 std::string Circle::getName() const { return "circle"; }
 
-std::string Circle::getDescription() const { return "A circle has a radius."; }
-
-std::string Circle::getUsage() const {
-  return "describe_object circle <radius>";
+std::string Circle::getDescription() const {
+  return "A circle has a radius. If the user provides the radius:\n"
+         "\"./describe_object circle <radius>\""
+         "\nThe program can calculate circumference, area.";
 }
 
 bool Circle::parseAndCalculate(const std::vector<std::string> &args) {
   if (args.size() == 0) {
-    std::cout << "A circle has a radius. If the user provides the radius:\n"
-              << "\"describe_object circle <radius>\"\n"
-              << "The program can calculate: circumference, area.";
-  } else if (args.size() != 1) {
-    std::cerr << "Error: Circle requires exactly 1 argument (radius)\n";
+    std::cout << getDescription() << std::endl;
+    } else if (args.size() != 1) {
+    std::cerr << "Usage: ./describe_object circle <radius>" << std::endl;
     return false;
   } else {
     try {
@@ -37,8 +35,8 @@ bool Circle::parseAndCalculate(const std::vector<std::string> &args) {
     double area = M_PI * radius * radius;
 
     std::cout << "Circle with radius " << radius << ":\n";
-    std::cout << " Circumference: " << circumference << "\n";
-    std::cout << " Area: " << area << "\n";
+    std::cout << " - Circumference: " << circumference << "\n";
+    std::cout << " - Area: " << area << "\n";
   }
 
   return true;
@@ -48,21 +46,17 @@ bool Circle::parseAndCalculate(const std::vector<std::string> &args) {
 std::string Square::getName() const { return "square"; }
 
 std::string Square::getDescription() const {
-  return "A square has four sides that are of equal length.";
-}
-
-std::string Square::getUsage() const {
-  return "describe_object square <length>";
+  return std::string("A square has four sides that are of equal length."
+                    "If the user provides the length:\n"
+                    "\"./describe_object square <length>\""
+                    "\nThe program can calculate: perimeter, area.");
 }
 
 bool Square::parseAndCalculate(const std::vector<std::string> &args) {
   if (args.size() == 0) {
-    std::cout << "A square has four sides that are of equal length. If the "
-                 "user provides the length:\n"
-              << "\"describe_object square <length>\"\n"
-              << "The program can calculate: perimeter, area.";
+    std::cout << getDescription() << std::endl;
   } else if (args.size() != 1) {
-    std::cerr << "Error: Square requires exactly 1 argument (length)\n";
+    std::cerr << "Usage: ./describe_object square <length>";
     return false;
   } else {
     try {
@@ -80,8 +74,8 @@ bool Square::parseAndCalculate(const std::vector<std::string> &args) {
     double area = length * length;
 
     std::cout << "Square with length " << length << ":\n";
-    std::cout << " Perimeter: " << perimeter << "\n";
-    std::cout << " Area: " << area << "\n";
+    std::cout << " - Perimeter: " << perimeter << "\n";
+    std::cout << " - Area: " << area << "\n";
   }
 
   return true;
@@ -91,21 +85,16 @@ bool Square::parseAndCalculate(const std::vector<std::string> &args) {
 std::string Rectangle::getName() const { return "rect"; }
 
 std::string Rectangle::getDescription() const {
-  return "A rectangle has 4 sides broken into 2 side pairs of equal length and "
-         "are parallel.";
-}
-
-std::string Rectangle::getUsage() const {
-  return "describe_object rect <length side 1> <length side 2>";
+  return "A rectangle has 4 sides broken into 2 side pairs"
+         " of equal length and are parallel.\n"
+         "If the user provides the length of each pair: \n"
+         "\"./describe_object rect <length side 1> <length side 2>\"\n"
+         "The program can calculate: perimeter, area.";
 }
 
 bool Rectangle::parseAndCalculate(const std::vector<std::string> &args) {
   if (args.size() == 0) {
-    std::cout << "A rectangle has 4 sides broken into 2 side pairs of equal "
-                 "length and are parallel.\n"
-              << "If the user provides the length of each pair:\n"
-              << "\"describe_object rect <length side 1> <length side 2>\"\n"
-              << "The program can calculate: perimeter, area.";
+    std::cout << getDescription() << std::endl;
   } else if (args.size() != 2) {
     std::cerr
         << "Error: Rectangle requires exactly 2 arguments (length1, length2)\n";
