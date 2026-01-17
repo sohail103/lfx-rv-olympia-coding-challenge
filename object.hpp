@@ -37,11 +37,10 @@ public:
 template <typename T> class ObjectRegistrar {
 public:
   ObjectRegistrar(const std::string &name) {
-    ObjectRegistry::registerObject(
-        name, []() -> std::unique_ptr<Object> {
-          return std::make_unique<T>(); // lambda returns unique_ptr to newly
-                                        // created object
-        });
+    ObjectRegistry::registerObject(name, []() -> std::unique_ptr<Object> {
+      return std::make_unique<T>(); // lambda returns unique_ptr to newly
+                                    // created object
+    });
   }
 };
 

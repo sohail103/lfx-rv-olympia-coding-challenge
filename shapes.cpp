@@ -16,7 +16,7 @@ std::string Circle::getDescription() const {
 bool Circle::parseAndCalculate(const std::vector<std::string> &args) {
   if (args.size() == 0) {
     std::cout << getDescription() << std::endl;
-    } else if (args.size() != 1) {
+  } else if (args.size() != 1) {
     std::cerr << "Usage: ./describe_object circle <radius>" << std::endl;
     return false;
   } else {
@@ -31,8 +31,9 @@ bool Circle::parseAndCalculate(const std::vector<std::string> &args) {
       return false;
     }
 
-    double circumference = 2 * M_PI * radius;
-    double area = M_PI * radius * radius;
+    const double pi = std::acos(-1); // calculating value of pi from inverse cos
+    double circumference = 2 * pi * radius;
+    double area = pi * radius * radius;
 
     std::cout << "Circle with radius " << radius << ":\n";
     std::cout << " - Circumference: " << circumference << "\n";
@@ -46,10 +47,10 @@ bool Circle::parseAndCalculate(const std::vector<std::string> &args) {
 std::string Square::getName() const { return "square"; }
 
 std::string Square::getDescription() const {
-  return std::string("A square has four sides that are of equal length."
-                    "If the user provides the length:\n"
-                    "\"./describe_object square <length>\""
-                    "\nThe program can calculate: perimeter, area.");
+  return std::string("A square has four sides that are of equal length.\n"
+                     "If the user provides the length:\n"
+                     "\"./describe_object square <length>\""
+                     "\nThe program can calculate: perimeter, area.");
 }
 
 bool Square::parseAndCalculate(const std::vector<std::string> &args) {
@@ -97,7 +98,7 @@ bool Rectangle::parseAndCalculate(const std::vector<std::string> &args) {
     std::cout << getDescription() << std::endl;
   } else if (args.size() != 2) {
     std::cerr
-        << "Error: Rectangle requires exactly 2 arguments (length1, length2)\n";
+        << "Usage: ./describe_object rect <length side 1> <length side 2>";
     return false;
   } else {
     try {
@@ -117,13 +118,14 @@ bool Rectangle::parseAndCalculate(const std::vector<std::string> &args) {
 
     std::cout << "Rectangle with lengths " << length1 << " and " << length2
               << ":\n";
-    std::cout << " Perimeter: " << perimeter << "\n";
-    std::cout << " Area: " << area << "\n";
+    std::cout << " - Perimeter: " << perimeter << "\n";
+    std::cout << " - Area: " << area << "\n";
   }
 
   return true;
 }
 
+// object registrations
 REGISTER_OBJECT(Circle, "circle")
 REGISTER_OBJECT(Square, "square")
 REGISTER_OBJECT(Rectangle, "rect")
