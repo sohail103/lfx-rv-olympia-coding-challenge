@@ -1,4 +1,4 @@
-CXX := clang++
+CXX ?= c++
 CXXFLAGS := -std=c++17 -Wall -Wextra -O2
 
 TARGET := describe_object
