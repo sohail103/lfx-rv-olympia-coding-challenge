@@ -4,6 +4,9 @@
 
 A modular C++ solution to the describe_object coding challenge. This implementation uses a registration based factory pattern to ensure the main program remains completely agnostic to specific object types. Adding a new object type only requires implementing the interface (in shapes.hpp and shapes.cpp) and registering it using the simple macro `REGISTER_OBJECT(ClassName, name)`.
 
+## Development
+* All code was formatted using `clang-format` and the LLVM styleguide for consistency.
+
 ## Build and Run
 
 ### Requirements
